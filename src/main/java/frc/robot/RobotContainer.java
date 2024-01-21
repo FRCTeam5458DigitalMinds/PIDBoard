@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.m_ArmSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final m_ArmSubsystem m_armSubsystem = new m_ArmSubsystem();
+  private final ArmSubsystem m_ArmSubsystem = new ArmSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_XboxController =
@@ -43,14 +43,17 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    
+
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_XboxController.button(Button.kRightBumper.value).onTrue(new InstantCommand(() -> m_armSubsystem.toManual(.1)));
-    m_XboxController.button(Button.kLeftBumper.value).onTrue(new InstantCommand(() -> m_armSubsystem.toManual(0)));
+    m_XboxController.button(Button.kA.value).onTrue(new InstantCommand(() -> m_ArmSubsystem.toSetPoint(0)));
+    m_XboxController.button(Button.kB.value).onTrue(new InstantCommand(() -> m_ArmSubsystem.toSetPoint(1)));
+    m_XboxController.button(Button.kY.value).onTrue(new InstantCommand(() -> m_ArmSubsystem.toSetPoint(2)));
 
-    m_XboxController.button(Button.kA.value).onTrue(new InstantCommand(() -> m_armSubsystem.toSetPoint(0)));
-    m_XboxController.button(Button.kB.value).onTrue(new InstantCommand(() -> m_armSubsystem.toSetPoint(1)));
-    m_XboxController.button(Button.kY.value).onTrue(new InstantCommand(() -> m_armSubsystem.toSetPoint(2)));
+    m_XboxController.button(Button.kLeftBumper.value).onTrue(new InstantCommand(() -> m_ArmSubsystem.manualControl()));
+    m_XboxController.button(Button.kX.value).onTrue(new InstantCommand(() -> m_ArmSubsystem.stopControl()));
+
   }
 
   /**
@@ -58,8 +61,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*public Command getAutonomousCommand() {
+ /* public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return ;
+    return Autos.exampleAuto(m_exampleSubsystem);
   } */
 }

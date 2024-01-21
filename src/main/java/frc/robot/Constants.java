@@ -17,25 +17,19 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   public static class ArmConstants {
-    public static final int ID = 6;
-
-    //PID values for the controller, to tune look up methods but start with 0
-    //largely ignore the integral value as it can quickly cause problems
-
-    //targets the errors over time
-    public static final double kI = 0.000;
-
+    public static final int ARM_ID = 6;
+    
+    public static final double kI = 0.05;
+  
     //targets the errors in positioning
-    public static final double kP = 0.0075;
+    public static final double kP = 0.15;
+
     //targets the errors in velocity
-    public static final double kD = 0.0070;
+    public static final double kD = 0.15;
 
-    public static final double FF = 0.00035;
+    public static final double kV = 0.12;
 
-    public static final double max_vel = 2000;
-    public static final double min_vel = 0;
-    public static final double max_accel = 1500;
 
     public static final double allowed_error = 0.007;
-  } 
+  }
 }
