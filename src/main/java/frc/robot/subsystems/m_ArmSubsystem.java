@@ -5,23 +5,21 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkBase.ControlType;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class m_ArmSubsystem extends SubsystemBase {
-  private int[] m_setPoints = {0, 10, 20};
-  private int arm_ID = Constants.ArmConstants.ID;
-
-  private final SparkMaxPIDController armController;
+  private int[] m_setPoints;
+  private int arm_ID;
+  private final SparkPIDController armController;
   private RelativeEncoder armEncoder;
   private CANSparkMax armMotor;
   Boolean atSetPoint = false;
@@ -35,17 +33,17 @@ public class m_ArmSubsystem extends SubsystemBase {
 
     armController = armMotor.getPIDController();
 
-    armController.setP(Constants.ArmConstants.kP);
-    armController.setI(Constants.ArmConstants.kI);
-    armController.setD(Constants.ArmConstants.kD);
-    armController.setFF(Constants.ArmConstants.FF);
+    armController.setP(Constants.NeoArmConstants.kP);
+    armController.setI(Constants.NeoArmConstants.kI);
+    armController.setD(Constants.NeoArmConstants.kD);
+    armController.setFF(Constants.NeoArmConstants.FF);
 
     armController.setFeedbackDevice(armEncoder);
-    armController.setSmartMotionMaxAccel(Constants.ArmConstants.max_accel, 0);
+    armController.setSmartMotionMaxAccel(Constants.NeoArmConstants.max_accel, 0);
 
-    armController.setSmartMotionMinOutputVelocity(Constants.ArmConstants.min_vel, 0);
-    armController.setSmartMotionMaxVelocity(Constants.ArmConstants.max_vel, 0);
-    armController.setSmartMotionAllowedClosedLoopError(Constants.ArmConstants.allowed_error, 0);
+    armController.setSmartMotionMinOutputVelocity(Constants.NeoArmConstants.min_vel, 0);
+    armController.setSmartMotionMaxVelocity(Constants.NeoArmConstants.max_vel, 0);
+    armController.setSmartMotionAllowedClosedLoopError(Constants.NeoArmConstants.allowed_error, 0);
   }
 
   public void toSetPoint(int setPoint) 

@@ -16,7 +16,7 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  public static class ArmConstants {
+  public static class NeoArmConstants {
     public static final int ID = 6;
 
     //PID values for the controller, to tune look up methods but start with 0
